@@ -11,7 +11,7 @@ entity Lab4 is
            start    : in  STD_LOGIC;   -- ������ 2 (BTN2)
            
            inv_clk  : out STD_LOGIC;
-           half_clk : out STD_LOGIC;
+        --    half_clk : out STD_LOGIC;
            brst_o   : out STD_LOGIC;
       
            
