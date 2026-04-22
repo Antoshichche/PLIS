@@ -32,6 +32,21 @@ architecture Behavioral of Lab4 is
 -- �������������� ������: ���������� ������� �� ������ start
         signal blink_enable : STD_LOGIC := '0';
         
+    
+    signal clk_enable : STD_LOGIC := '0';
+    signal clk_1 : STD_LOGIC := '0';
+
+    signal mmcm_clk_0 : STD_LOGIC := '0';
+    signal mmcm_fbin : STD_LOGIC := '0';
+    signal mmcm_fbout : STD_LOGIC := '0';
+    signal mmcm_locked : STD_LOGIC := '0';
+
+    signal idelay_rst   : STD_LOGIC := '0';
+    signal idelay_rdy_i : STD_LOGIC := '0';
+    signal rst_sync     : STD_LOGIC_VECTOR(1 downto 0) := "00";
+    signal rdy_sync     : STD_LOGIC_VECTOR(2 downto 0) := "000";
+    signal rst_cnt      : UNSIGNED(3 downto 0) := "0000";
+    signal idelay_ctrl_rdy : STD_LOGIC;
        
 begin
 
@@ -41,22 +56,69 @@ begin
         BANDWIDTH        => "OPTIMIZED",
         CLKFBOUT_MULT_F  => 8.0,          -- 
         clkin1_period    => 8.0,          --  8.0 ��� 125 ���
-        CLKOUT0_DIVIDE_F => 8.0,          -- half_clk ����� 125 ���
-        clkout0_phase    => 45.0,
+        CLKOUT0_DIVIDE_F => 4.0,    -- 250 fpr reset and idelay
+        clkout0_phase    => 0.0,
         CLKOUT1_PHASE    => -90.0,
-        clkout1_divide   => 4             -- inv_clk ����� 250 ���
+        clkout1_divide   => 8            -- inv_clk ����� 250 ���
     )
     port map(
-        clkfbin  => buf_clk,
-        CLKOUT0  => bhalf_clk,
-        clkout1  => binv_clk,
+        clkfbin  => mmcm_fbin,
+        clkfbout  => mmcm_fbout,
+        CLKOUT0  => mmcm_clk_0,
+        clkout1  => clk_1,
         CLKIN1   => buf_clk,
+        LOCKED   => mmcm_locked,
         PWRDWN   => '0',
         RST      => '0'
     );
 
+    mmcm_fbin <= mmcm_fbout;
+
+    process(mmcm_clk_0)
+        begin
+            if rising_edge(mmcm_clk_0) then
+                rst_sync <= rst_sync(0) & (not mmcm_locked);
+                if rst_sync(1) = '1' then
+                    rst_cnt <= (others => '0');
+                    idelay_rst <= '1';
+                elsif rst_cnt < 7 then  -- 7 cycles > 5 cycle minimum
+                    rst_cnt <= rst_cnt + 1;
+                    idelay_rst <= '1';
+                else
+                    idelay_rst <= '0';
+                end if;
+            end if;
+    end process;
+
+    IDELAYCTRL_INST : IDELAYCTRL
+    port map (
+        REFCLK  => mmcm_clk_0,
+        RST     => idelay_rst,
+        RDY     => idelay_rdy_i
+    );
+
+    process(clk_1)
+        begin
+            if rising_edge(clk_1) then
+                if breset = '1' then
+                    rdy_sync <= rdy_sync(1 downto 0) & idelay_rdy_i;
+                else
+                    rdy_sync <= "000";
+                end if;
+            end if;
+    end process;
+
+    clk_enable <= rdy_sync(2) and rdy_sync(1);
+
+    BUFGCE_INST : BUFGCE
+    port map (
+        I  => clk_1,
+        CE => clk_enable,
+        O  => binv_clk
+    );
+    
     obuf_inv_clk:  obuf port map ( O => inv_clk,  I => binv_clk );
-    obuf_half_clk: obuf port map ( O => half_clk, I => bhalf_clk );
+    -- obuf_half_clk: obuf port map ( O => half_clk, I => bhalf_clk );
 
     BUFG_clk: BUFG port map ( O => buf_clk, I => clk );
 
@@ -69,23 +131,16 @@ begin
         port map (
             Q   => reset_z,
             A0  => '0', A1 => '0', A2 => '0', A3 => '1',
-            CLK => bhalf_clk,
+            CLK => binv_clk,
             CE  => '1',
             D   => breset
         );
 
     brst_o  <= reset_z;
-
-    IDELAYCTRL_inst : IDELAYCTRL
-        port map (
-            RDY => RDY,       -- 1-bit output: Ready output
-            REFCLK => , -- 1-bit input: Reference clock input
-            RST =>         -- 1-bit input: Active high reset input
-        );
     
-    process(bhalf_clk)
+    process(binv_clk)
         begin
-            if rising_edge(bhalf_clk) then
+            if rising_edge(binv_clk) then
     
                 -- ������ reset ������ ��������� ��
                 if reset_z = '1' then

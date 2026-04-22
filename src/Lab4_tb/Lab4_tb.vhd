@@ -10,18 +10,16 @@ component Lab4    Port (
        clk : in STD_LOGIC;
        reset : in STD_LOGIC;
        start : in STD_LOGIC;
-       counter : out STD_LOGIC_VECTOR(15 downto 0);
        inv_clk : out STD_LOGIC;
        half_clk : out STD_LOGIC;
        brst_o : out STD_LOGIC
        );
 end component;
 
-signal counter: STD_LOGIC_VECTOR(15 downto 0);
 signal clk, reset, start, half_clk,inv_clk,reset_z: STD_LOGIC;
 
 begin
-dut: Lab4 port map (clk => clk, reset =>reset, start => start, counter => counter, half_clk => half_clk, inv_clk => inv_clk, brst_o => reset_z);
+dut: Lab4 port map (clk => clk, reset =>reset, start => start, half_clk => half_clk, inv_clk => inv_clk, brst_o => reset_z);
 
 clock_process: process
 begin
