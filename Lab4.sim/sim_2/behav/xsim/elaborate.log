@@ -1,0 +1,7 @@
+Vivado Simulator 2018.3
+Copyright 1986-1999, 2001-2018 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2018.3/bin/unwrapped/win64.o/xelab.exe -wto 322c61fd50924afc90817758edcd7c5f --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot Lab4_tb_behav xil_defaultlib.Lab4_tb -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+ERROR: [VRFC 10-718] formal port <counter> does not exist in entity <Lab4>.  Please compare the definition of block <Lab4> to its component declaration and its instantion to detect the mismatch. [C:/Users/user/VivadoProjects/2018-3/2026_labs/CheparinAM/Lab4_Project_1/src/Lab4_tb/Lab4_tb.vhd:13]
+ERROR: [XSIM 43-3321] Static elaboration of top level VHDL design unit lab4_tb in library work failed.

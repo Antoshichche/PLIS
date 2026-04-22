@@ -1,0 +1,4 @@
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/user/VivadoProjects/2018-3/2026_labs/CheparinAM/Lab4_Project_1/src/Lab4/Lab4.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'Lab4'
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/user/VivadoProjects/2018-3/2026_labs/CheparinAM/Lab4_Project_1/src/Lab4_tb/Lab4_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'Lab4_tb'

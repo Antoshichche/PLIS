@@ -1,0 +1,22 @@
+Vivado Project Migration Report
+===============================
+Source project        : Lab4
+Source XPR            : C:/Users/user/VivadoProjects/2017-2/2026_labs/CheparinAM/Lab4_Project_LR4/Lab4_Project_1/Lab4.xpr
+Source Vivado version : 2017.2
+Target Vivado version : 2018.3
+Part                  : xc7z010clg400-1
+Target language       : VHDL
+Simulator language    : VHDL
+Active sim set        : sim_2
+Replay synthesis      : 1
+Replay implementation : write_bitstream
+
+Filesets:
+  - constrs_1 (Constrs): 1 file(s)
+  - sim_1 (SimulationSrcs): 0 file(s)
+  - sim_2 (SimulationSrcs): 1 file(s)
+  - sources_1 (DesignSrcs): 1 file(s)
+
+Runs:
+  - impl_1: state=current steps=init_design,opt_design,power_opt_design,place_design,post_place_power_opt_design,phys_opt_design,route_design,post_route_phys_opt_design,write_bitstream
+  - synth_1: state=current steps=synth_design
