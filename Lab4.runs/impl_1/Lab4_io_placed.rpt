@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------
 | Tool Version              : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-| Date                      : Wed Apr 22 21:09:13 2026
+| Date                      : Wed Apr 22 22:41:19 2026
 | Host                      : KOMPUTER running 64-bit major release  (build 9200)
 | Command                   : report_io -file Lab4_io_placed.rpt
 | Design                    : Lab4
@@ -25,7 +25,7 @@ Table of Contents
 +---------------+
 | Total User IO |
 +---------------+
-|             7 |
+|             6 |
 +---------------+
 
 
@@ -368,7 +368,7 @@ Table of Contents
 | U11        |             | Dedicated  | VCCO_13                 | VCCO          |             |      13 |            |      |                     |                      |   any** |            |           |          |      |                  |              |                   |              |
 | U12        |             | High Range | IO_L2N_T0_34            | User IO       |             |      34 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
 | U13        |             | High Range | IO_L3P_T0_DQS_PUDC_B_34 | User IO       |             |      34 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
-| U14        | half_clk    | High Range | IO_L11P_T1_SRCC_34      | OUTPUT        | LVCMOS33    |      34 |         12 | SLOW |                     |            FP_VTT_50 |         | FIXED      |           |          |      | NONE             |              |                   |              |
+| U14        |             | High Range | IO_L11P_T1_SRCC_34      | User IO       |             |      34 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
 | U15        |             | High Range | IO_L11N_T1_SRCC_34      | User IO       |             |      34 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
 | U16        |             |            | GND                     | GND           |             |         |            |      |                     |                      |     0.0 |            |           |          |      |                  |              |                   |              |
 | U17        |             | High Range | IO_L9N_T1_DQS_34        | User IO       |             |      34 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |

@@ -63,91 +63,23 @@ proc step_failed { step } {
 set_msg_config -id {Synth 8-256} -limit 10000
 set_msg_config -id {Synth 8-638} -limit 10000
 
-start_step init_design
-set ACTIVE_STEP init_design
+start_step write_bitstream
+set ACTIVE_STEP write_bitstream
 set rc [catch {
-  create_msg_db init_design.pb
-  create_project -in_memory -part xc7z010clg400-1
-  set_property design_mode GateLvl [current_fileset]
-  set_param project.singleFileAddWarning.threshold 0
+  create_msg_db write_bitstream.pb
+  open_checkpoint Lab4_routed.dcp
   set_property webtalk.parent_dir C:/Users/user/VivadoProjects/2018-3/2026_labs/CheparinAM/Lab4_Project_1/Lab4.cache/wt [current_project]
-  set_property parent.project_path C:/Users/user/VivadoProjects/2018-3/2026_labs/CheparinAM/Lab4_Project_1/Lab4.xpr [current_project]
-  set_property ip_output_repo C:/Users/user/VivadoProjects/2018-3/2026_labs/CheparinAM/Lab4_Project_1/Lab4.cache/ip [current_project]
-  set_property ip_cache_permissions {read write} [current_project]
-  add_files -quiet C:/Users/user/VivadoProjects/2018-3/2026_labs/CheparinAM/Lab4_Project_1/Lab4.runs/synth_1/Lab4.dcp
-  read_xdc C:/Users/user/VivadoProjects/2018-3/2026_labs/CheparinAM/Lab4_Project_1/src/Lab4/Zybo_board.xdc
-  link_design -top Lab4 -part xc7z010clg400-1
-  close_msg_db -file init_design.pb
+  catch { write_mem_info -force Lab4.mmi }
+  write_bitstream -force Lab4.bit 
+  catch {write_debug_probes -quiet -force Lab4}
+  catch {file copy -force Lab4.ltx debug_nets.ltx}
+  close_msg_db -file write_bitstream.pb
 } RESULT]
 if {$rc} {
-  step_failed init_design
+  step_failed write_bitstream
   return -code error $RESULT
 } else {
-  end_step init_design
-  unset ACTIVE_STEP 
-}
-
-start_step opt_design
-set ACTIVE_STEP opt_design
-set rc [catch {
-  create_msg_db opt_design.pb
-  opt_design 
-  write_checkpoint -force Lab4_opt.dcp
-  create_report "impl_1_opt_report_drc_0" "report_drc -file Lab4_drc_opted.rpt -pb Lab4_drc_opted.pb -rpx Lab4_drc_opted.rpx"
-  close_msg_db -file opt_design.pb
-} RESULT]
-if {$rc} {
-  step_failed opt_design
-  return -code error $RESULT
-} else {
-  end_step opt_design
-  unset ACTIVE_STEP 
-}
-
-start_step place_design
-set ACTIVE_STEP place_design
-set rc [catch {
-  create_msg_db place_design.pb
-  if { [llength [get_debug_cores -quiet] ] > 0 }  { 
-    implement_debug_core 
-  } 
-  place_design 
-  write_checkpoint -force Lab4_placed.dcp
-  create_report "impl_1_place_report_io_0" "report_io -file Lab4_io_placed.rpt"
-  create_report "impl_1_place_report_utilization_0" "report_utilization -file Lab4_utilization_placed.rpt -pb Lab4_utilization_placed.pb"
-  create_report "impl_1_place_report_control_sets_0" "report_control_sets -verbose -file Lab4_control_sets_placed.rpt"
-  close_msg_db -file place_design.pb
-} RESULT]
-if {$rc} {
-  step_failed place_design
-  return -code error $RESULT
-} else {
-  end_step place_design
-  unset ACTIVE_STEP 
-}
-
-start_step route_design
-set ACTIVE_STEP route_design
-set rc [catch {
-  create_msg_db route_design.pb
-  route_design 
-  write_checkpoint -force Lab4_routed.dcp
-  create_report "impl_1_route_report_drc_0" "report_drc -file Lab4_drc_routed.rpt -pb Lab4_drc_routed.pb -rpx Lab4_drc_routed.rpx"
-  create_report "impl_1_route_report_methodology_0" "report_methodology -file Lab4_methodology_drc_routed.rpt -pb Lab4_methodology_drc_routed.pb -rpx Lab4_methodology_drc_routed.rpx"
-  create_report "impl_1_route_report_power_0" "report_power -file Lab4_power_routed.rpt -pb Lab4_power_summary_routed.pb -rpx Lab4_power_routed.rpx"
-  create_report "impl_1_route_report_route_status_0" "report_route_status -file Lab4_route_status.rpt -pb Lab4_route_status.pb"
-  create_report "impl_1_route_report_timing_summary_0" "report_timing_summary -max_paths 10 -file Lab4_timing_summary_routed.rpt -pb Lab4_timing_summary_routed.pb -rpx Lab4_timing_summary_routed.rpx -warn_on_violation "
-  create_report "impl_1_route_report_incremental_reuse_0" "report_incremental_reuse -file Lab4_incremental_reuse_routed.rpt"
-  create_report "impl_1_route_report_clock_utilization_0" "report_clock_utilization -file Lab4_clock_utilization_routed.rpt"
-  create_report "impl_1_route_report_bus_skew_0" "report_bus_skew -warn_on_violation -file Lab4_bus_skew_routed.rpt -pb Lab4_bus_skew_routed.pb -rpx Lab4_bus_skew_routed.rpx"
-  close_msg_db -file route_design.pb
-} RESULT]
-if {$rc} {
-  write_checkpoint -force Lab4_routed_error.dcp
-  step_failed route_design
-  return -code error $RESULT
-} else {
-  end_step route_design
+  end_step write_bitstream
   unset ACTIVE_STEP 
 }
 
