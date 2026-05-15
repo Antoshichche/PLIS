@@ -1,0 +1,39 @@
+Vivado Simulator 2018.3
+Copyright 1986-1999, 2001-2018 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2018.3/bin/unwrapped/win64.o/xelab.exe -wto 40145523f99349cd81157992e8a502bf --incr --debug typical --relax --mt 2 -L fifo_generator_v13_2_3 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip -L xpm --snapshot Lab5_tb_behav xil_defaultlib.Lab5_tb xil_defaultlib.glbl -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package std.standard
+Compiling package std.textio
+Compiling package ieee.std_logic_1164
+Compiling package ieee.std_logic_arith
+Compiling package ieee.std_logic_unsigned
+Compiling package ieee.numeric_std
+Compiling package unisim.vcomponents
+Compiling package unimacro.vcomponents
+Compiling package ieee.std_logic_signed
+Compiling package ieee.vital_timing
+Compiling package ieee.vital_primitives
+Compiling package unisim.vpkg
+Compiling package vl.vl_types
+Compiling module xil_defaultlib.glbl
+Compiling architecture ibuf_v of entity unisim.IBUF [\IBUF(iostandard="LVTTL")(1,9)(1...]
+Compiling architecture ibuf_lvttl_v of entity unisim.IBUF_LVTTL [ibuf_lvttl_default]
+Compiling module fifo_generator_v13_2_3.fifo_generator_v13_2_3_sync_stag...
+Compiling module fifo_generator_v13_2_3.fifo_generator_v13_2_3_bhv_ver_a...
+Compiling module fifo_generator_v13_2_3.fifo_generator_v13_2_3_CONV_VER(...
+Compiling module fifo_generator_v13_2_3.fifo_generator_vlog_beh(C_DATA_C...
+Compiling module fifo_generator_v13_2_3.fifo_generator_v13_2_3(C_EN_SAFE...
+Compiling module xil_defaultlib.fifo_generator_0
+Compiling architecture mmcme2_adv_v of entity unisim.MMCME2_ADV [\MMCME2_ADV(clkfbout_mult_f=8.0,...]
+Compiling architecture mmcm_base_v of entity unisim.MMCM_BASE [\MMCM_BASE(clkfbout_mult_f=8.0,c...]
+Compiling architecture bufg_v of entity unisim.BUFG [bufg_default]
+Compiling architecture ibuf_v of entity unisim.IBUF [\IBUF(1,9)(1,1)(1,4)(1,7)\]
+Compiling architecture srl16e_v of entity unisim.SRL16E [\SRL16E(0,15)\]
+Compiling architecture behavioral of entity xil_defaultlib.Lab5 [lab5_default]
+Compiling architecture behavioral of entity xil_defaultlib.lab5_tb
+Built simulation snapshot Lab5_tb_behav
