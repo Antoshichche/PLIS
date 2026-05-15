@@ -64,9 +64,7 @@ COMPONENT fifo_generator_0
     full : OUT STD_LOGIC;
     empty : OUT STD_LOGIC;
     prog_full : OUT STD_LOGIC;
-    prog_empty : OUT STD_LOGIC;
-    wr_rst_busy : OUT STD_LOGIC;
-    rd_rst_busy : OUT STD_LOGIC
+    prog_empty : OUT STD_LOGIC
   );
 END COMPONENT;
 -- COMP_TAG_END ------ End COMPONENT Declaration ------------
@@ -87,9 +85,7 @@ your_instance_name : fifo_generator_0
     full => full,
     empty => empty,
     prog_full => prog_full,
-    prog_empty => prog_empty,
-    wr_rst_busy => wr_rst_busy,
-    rd_rst_busy => rd_rst_busy
+    prog_empty => prog_empty
   );
 -- INST_TAG_END ------ End INSTANTIATION Template ---------
 

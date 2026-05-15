@@ -38,7 +38,7 @@ architecture Behavioral of Lab5 is
         );
     end component;
 
-    -- Внутренние сигналы (габариты MMCM, FIFO и отладки)
+    -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ MMCM, FIFO пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ)
     signal MMCME_1_buf   : std_logic;
     signal MMCME_2_buf   : std_logic;
     signal locked_buf    : std_logic;
@@ -53,6 +53,7 @@ architecture Behavioral of Lab5 is
     signal buff_o_data   : std_logic_vector(15 downto 0);
     signal rd_en_in, wr_en_in : std_logic := '0';
     signal o_full, o_empty     : std_logic := '0';
+    signal p_full, p_empty     : std_logic := '0';
     signal S_led, R_led : STD_LOGIC := '0';
     signal MMCM_LOCKED      : std_logic;
     signal o_data         : std_logic_vector(15 downto 0);
@@ -72,8 +73,8 @@ begin
             dout       => o_data,
             full       => o_full,
             empty      => o_empty,
-            prog_full  => open,
-            prog_empty => open
+            prog_full  => p_full, -- EK "open" operator for unconnected pins in test benches only
+            prog_empty => p_empty
         );
 
     -- MMCM
@@ -98,7 +99,7 @@ begin
             RST       => '0'
         );
 
-    -- Буферизация входных данных
+    -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     form_buffer_fifo_in: for i in 0 to 15 generate
         ibuf_in_data: ibuf_LVTTL
             port map (
@@ -116,7 +117,7 @@ begin
     BUFG_mmcm2: BUFG port map (O => MMCME_2_buf, I => MMCME_2);
     --BUFG_locked: BUFG port map (O => locked_buf, I => MMCM_LOCKED);
 
-    -- Сброс
+    -- пїЅпїЅпїЅпїЅпїЅ
     use_SRL16E: SRL16E
         generic map (INIT => X"0000")
         port map (
@@ -129,7 +130,7 @@ begin
 
     brst_o <= reset_z;
 
-    -- Основной процесс
+    -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     process(MMCME_2_buf)
     begin
         if rising_edge(MMCME_2_buf) then
@@ -153,7 +154,7 @@ begin
         end if;
     end process;
 
-    -- FIFO управление
+    -- FIFO пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     process (o_full, o_empty, MMCME_2_buf, MMCME_1_buf)
     begin
         if rising_edge(MMCME_1_buf) then
@@ -172,13 +173,13 @@ begin
         end if;
     end process;
 
-    -- Выходы (только требуемые)
+    -- пїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ)
     S_led_o <= S_led;
     R_led_o <= R_led;
 debug_dout <= o_data;
-    -- Внутренние сигналы, ранее бывшие выходами:
+    -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ:
     -- MMCME_1_buf, MMCME_2_buf, wr_en_in, rd_en_in,
     -- o_full, o_empty, locked_buf, cl, fb_buf
-    -- теперь доступны только в симуляции через иерархию.
+    -- пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 
 end Behavioral;

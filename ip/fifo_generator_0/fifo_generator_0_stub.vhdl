@@ -1,7 +1,7 @@
 -- Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
--- Date        : Fri May 15 21:24:39 2026
+-- Date        : Fri May 15 21:51:02 2026
 -- Host        : KOMPUTER running 64-bit major release  (build 9200)
 -- Command     : write_vhdl -force -mode synth_stub
 --               c:/Users/user/VivadoProjects/2018-3/2026_labs/CheparinAM/PLIS/ip/fifo_generator_0/fifo_generator_0_stub.vhdl
@@ -24,9 +24,7 @@ entity fifo_generator_0 is
     full : out STD_LOGIC;
     empty : out STD_LOGIC;
     prog_full : out STD_LOGIC;
-    prog_empty : out STD_LOGIC;
-    wr_rst_busy : out STD_LOGIC;
-    rd_rst_busy : out STD_LOGIC
+    prog_empty : out STD_LOGIC
   );
 
 end fifo_generator_0;
@@ -35,7 +33,7 @@ architecture stub of fifo_generator_0 is
 attribute syn_black_box : boolean;
 attribute black_box_pad_pin : string;
 attribute syn_black_box of stub : architecture is true;
-attribute black_box_pad_pin of stub : architecture is "rst,wr_clk,rd_clk,din[15:0],wr_en,rd_en,dout[15:0],full,empty,prog_full,prog_empty,wr_rst_busy,rd_rst_busy";
+attribute black_box_pad_pin of stub : architecture is "rst,wr_clk,rd_clk,din[15:0],wr_en,rd_en,dout[15:0],full,empty,prog_full,prog_empty";
 attribute x_core_info : string;
 attribute x_core_info of stub : architecture is "fifo_generator_v13_2_3,Vivado 2018.3";
 begin

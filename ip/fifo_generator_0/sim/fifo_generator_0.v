@@ -64,9 +64,7 @@ module fifo_generator_0 (
   full,
   empty,
   prog_full,
-  prog_empty,
-  wr_rst_busy,
-  rd_rst_busy
+  prog_empty
 );
 
 input wire rst;
@@ -90,8 +88,6 @@ output wire full;
 output wire empty;
 output wire prog_full;
 output wire prog_empty;
-output wire wr_rst_busy;
-output wire rd_rst_busy;
 
   fifo_generator_v13_2_3 #(
     .C_COMMON_CLOCK(0),
@@ -123,7 +119,7 @@ output wire rd_rst_busy;
     .C_HAS_WR_RST(0),
     .C_IMPLEMENTATION_TYPE(2),
     .C_INIT_WR_PNTR_VAL(0),
-    .C_MEMORY_TYPE(1),
+    .C_MEMORY_TYPE(2),
     .C_MIF_FILE_NAME("BlankString"),
     .C_OPTIMIZATION_MODE(0),
     .C_OVERFLOW_LOW(0),
@@ -157,7 +153,7 @@ output wire rd_rst_busy;
     .C_WR_RESPONSE_LATENCY(1),
     .C_MSGON_VAL(1),
     .C_ENABLE_RST_SYNC(1),
-    .C_EN_SAFETY_CKT(1),
+    .C_EN_SAFETY_CKT(0),
     .C_ERROR_INJECTION_TYPE(0),
     .C_SYNCHRONIZER_STAGE(2),
     .C_INTERFACE_TYPE(0),
@@ -335,8 +331,8 @@ output wire rd_rst_busy;
     .prog_empty(prog_empty),
     .sbiterr(),
     .dbiterr(),
-    .wr_rst_busy(wr_rst_busy),
-    .rd_rst_busy(rd_rst_busy),
+    .wr_rst_busy(),
+    .rd_rst_busy(),
     .m_aclk(1'D0),
     .s_aclk(1'D0),
     .s_aresetn(1'D0),
