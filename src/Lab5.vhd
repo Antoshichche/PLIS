@@ -155,16 +155,16 @@ begin
     end process;
 
     -- FIFO ����������
-    process (o_full, o_empty, MMCME_2_buf, MMCME_1_buf)
+    process (MMCME_2_buf, MMCME_1_buf)
     begin
-        if rising_edge(MMCME_1_buf) then
+        if rising_edge(MMCME_2_buf) then
             if (o_full = '0' and bstart='1') then
                 wr_en_in <= '1' after 2 ns;
             else
                 wr_en_in <= '0'after 2 ns;
             end if;
         end if;
-        if rising_edge(MMCME_2_buf) then
+        if rising_edge(MMCME_1_buf) then
             if (o_empty = '0') then
                 rd_en_in <= '1'after 2 ns;
             else
