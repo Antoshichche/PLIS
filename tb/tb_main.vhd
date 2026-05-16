@@ -3,46 +3,42 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 use IEEE.std_logic_arith;
 
-entity Lab5_tb is
-end Lab5_tb;
+entity tb_main is
+end tb_main;
 
-architecture Behavioral of Lab5_tb is
+architecture Behavioral of tb_main is
 
-    component Lab5 Port (
+    component main Port (
         clk      : in  STD_LOGIC;
         reset    : in  STD_LOGIC;
         start    : in  STD_LOGIC;
-        in_data  : in  std_logic_vector(15 downto 0);
         S_led_o  : out STD_LOGIC;
-        R_led_o  : out STD_LOGIC;
-        brst_o   : out STD_LOGIC
+        R_led_o  : out STD_LOGIC
     );
     end component;
 
     signal clk      : STD_LOGIC := '0';
     signal reset    : STD_LOGIC;
     signal start    : STD_LOGIC;
-    signal reset_z  : STD_LOGIC;   -- brst_o
-    signal in_data_sig : std_logic_vector(15 downto 0) := (others => '0');
+    signal s_led    : STD_LOGIC;
+    signal r_led    : STD_LOGIC;
 
-    -- Сигналы для формирования входных данных (теперь используются без MMCM-выходов)
+    -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ MMCM-пїЅпїЅпїЅпїЅпїЅпїЅпїЅ)
     signal count      : std_logic_vector(15 downto 0) := (others => '0');
-    signal up_down    : std_logic := '0';   -- только инкремент
+    signal up_down    : std_logic := '0';   -- пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 begin
 
-    dut: Lab5
+    stand: main
         port map (
             clk     => clk,
             reset   => reset,
             start   => start,
-            in_data => in_data_sig,
-            S_led_o => open,   -- или можно оставить сигналом, здесь не используется
-            R_led_o => open,
-            brst_o  => reset_z
+            S_led_o => s_led,   -- пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+            R_led_o => r_led
         );
 
-    -- Генерация входных данных: теперь тактируем от clk (100 МГц), как и MMCME_2
+    -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ: пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ clk (100 пїЅпїЅпїЅ), пїЅпїЅпїЅ пїЅ MMCME_2
     data_in_counter: process (clk)
     begin
         if rising_edge(clk) then
@@ -53,9 +49,8 @@ begin
             end if;
         end if;
     end process;
-    in_data_sig <= count;
 
-    -- Тактовый генератор 100 МГц (период 10 нс)
+    -- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 100 пїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅ 10 пїЅпїЅ)
     clock_process: process
     begin
         clk <= '0';
@@ -64,12 +59,12 @@ begin
         wait for 5 ns;
     end process;
 
-    -- Сигнал сброса
+    -- пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
    reset_process: process
     begin
         reset <= '0';
      --   wait;
-        wait for 360 ns;   -- <-- увеличено с 600 нс до 2000 нс
+        wait for 360 ns;   -- <-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ 600 пїЅпїЅ пїЅпїЅ 2000 пїЅпїЅ
         reset <= '1';
         wait for 200 ns;
         reset <= '0';
@@ -82,7 +77,7 @@ begin
         wait;
     end process;
 
-    -- Сигнал старта
+    -- пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     start_process: process
     begin
         start <= '0';

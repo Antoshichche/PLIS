@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="tb_main_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="tb_main" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="11000000001fs"></ZoomEndTime>
+      <Cursor1Time time="2026693000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="282"></NameColumnWidth>
+      <ValueColumnWidth column_width="116"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="17" />
+   <wvobject fp_name="/tb_main/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_main/reset" type="logic">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_main/stand/reset_z" type="logic">
+      <obj_property name="ElementShortName">reset_z</obj_property>
+      <obj_property name="ObjectShortName">reset_z</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_main/start" type="logic">
+      <obj_property name="ElementShortName">start</obj_property>
+      <obj_property name="ObjectShortName">start</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_main/s_led" type="logic">
+      <obj_property name="ElementShortName">s_led</obj_property>
+      <obj_property name="ObjectShortName">s_led</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_main/r_led" type="logic">
+      <obj_property name="ElementShortName">r_led</obj_property>
+      <obj_property name="ObjectShortName">r_led</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_main/up_down" type="logic">
+      <obj_property name="ElementShortName">up_down</obj_property>
+      <obj_property name="ObjectShortName">up_down</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_main/stand/MMCME_1" type="logic">
+      <obj_property name="ElementShortName">MMCME_1</obj_property>
+      <obj_property name="ObjectShortName">MMCME_1</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_main/stand/MMCME_2" type="logic">
+      <obj_property name="ElementShortName">MMCME_2</obj_property>
+      <obj_property name="ObjectShortName">MMCME_2</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_main/stand/fifo/din" type="array">
+      <obj_property name="ElementShortName">din[15:0]</obj_property>
+      <obj_property name="ObjectShortName">din[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_main/stand/fifo/dout" type="array">
+      <obj_property name="ElementShortName">dout[15:0]</obj_property>
+      <obj_property name="ObjectShortName">dout[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_main/stand/rd_en_in" type="logic">
+      <obj_property name="ElementShortName">rd_en_in</obj_property>
+      <obj_property name="ObjectShortName">rd_en_in</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_main/stand/wr_en_in" type="logic">
+      <obj_property name="ElementShortName">wr_en_in</obj_property>
+      <obj_property name="ObjectShortName">wr_en_in</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_main/stand/o_full" type="logic">
+      <obj_property name="ElementShortName">o_full</obj_property>
+      <obj_property name="ObjectShortName">o_full</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_main/stand/o_empty" type="logic">
+      <obj_property name="ElementShortName">o_empty</obj_property>
+      <obj_property name="ObjectShortName">o_empty</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_main/stand/p_full" type="logic">
+      <obj_property name="ElementShortName">p_full</obj_property>
+      <obj_property name="ObjectShortName">p_full</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_main/stand/p_empty" type="logic">
+      <obj_property name="ElementShortName">p_empty</obj_property>
+      <obj_property name="ObjectShortName">p_empty</obj_property>
+   </wvobject>
+</wave_config>
